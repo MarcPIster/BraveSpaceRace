@@ -6,6 +6,7 @@
 #include "./ComponentPool.hpp"
 #include "./DataTypesECS.hpp"
 #include "./ECS.hpp"
+#include "../Timer.hpp"
 
 class EntityManager {
  public:

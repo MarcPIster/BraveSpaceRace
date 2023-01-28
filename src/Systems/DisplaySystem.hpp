@@ -19,6 +19,8 @@ class DisplaySystem : public ISystem {
   private:
    sf::RenderWindow* m_window;
    Hud* m_hud;
+   void displayEnemies();
+   void animateAstroids(EntityID ent, sf::RectangleShape *body) const;
 };
 
 #endif  // CLIENT_SRC_SYSTEMS_IDISPLAY_HPP_

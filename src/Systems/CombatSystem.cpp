@@ -9,10 +9,18 @@ CombatSystem::~CombatSystem() {}
 
 void CombatSystem::update() {
     std::vector<EntityID> enemies;
-    for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float, int>(*m_em.get())) {
-        int* alive =  (*m_em.get()).Get<int>(ent);
-        if (*alive == 1)
-            enemies.push_back(ent);
+    for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float, int, Timer>(*m_em.get())) {
+      Timer *timer = (*m_em.get()).Get<Timer>(ent);
+      int* alive =  (*m_em.get()).Get<int>(ent);
+      if (timer->checkStartTime()){
+        if (*alive == 0) {
+          *alive = 1;
+        }
+      }
+      if (*alive >= 1) {
+        enemies.push_back(ent);
+        continue ;
+      }
     }
     int i = 0;
     sf::CircleShape* body;
@@ -26,13 +34,13 @@ void CombatSystem::update() {
             std::cout << "Collision "<< i << std::endl;
             *life -= 10;
             int* alive = (*m_em.get()).Get<int>(enemy);
-            *alive = 0;
+            //set live to -1 to despawn, 0 to respawn
+            *alive = -1;
         }
         i++;
     }
     if (*life <= 0) {
         std::cout << "You died" << std::endl;
-        exit(0);
     }
 }
 

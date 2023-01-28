@@ -30,7 +30,7 @@ class SpriteECS {
     m_sprite.setTexture(*m_texture);
   }
 
-  const sf::Sprite* getSprite() const { return &m_sprite; }
+  sf::Sprite* getSprite() { return &m_sprite; }
 
   const sf::Texture* getTexture() const { return m_texture; }
 

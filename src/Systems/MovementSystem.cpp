@@ -44,9 +44,11 @@ void MovementSystem::update() {
     player_position = (*m_em.get()).Get<sf::CircleShape>(ent)->getPosition();
   }
 
-  for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float>(*m_em.get())) {
+  for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float, int>(*m_em.get())) {
+    int *lifes = (*m_em.get()).Get<int>(ent);
+    if (!*lifes >= 1)
+      continue ;
     sf::RectangleShape* enemy = (*m_em.get()).Get<sf::RectangleShape>(ent);
-
     Pos *pos = (*m_em.get()).Get<Pos>(ent);
     float *speed = (*m_em.get()).Get<float>(ent);
     pos->position = moveEnemies(pos->position, player_position, *speed);

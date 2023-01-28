@@ -13,7 +13,15 @@ find_package(OpenGL REQUIRED OPTIONAL_COMPONENTS OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 
-add_executable(braveSpaceRace src/main.cpp src/ECS/ComponentPool.hpp src/ECS/DataTypesECS.hpp src/ECS/ECS.hpp src/ECS/EntityManager.hpp src/ECS/EntityViewer.hpp src/ECS/ISystem.hpp src/InputManager/InputManager.cpp src/InputManager/InputManager.hpp src/Systems/DisplaySystem.cpp src/Systems/DisplaySystem.hpp src/Systems/MovementSystem.cpp src/Systems/MovementSystem.hpp src/InputManager/EventQueue/EventQueue.cpp src/InputManager/EventQueue/EventQueue.hpp src/Hud.cpp src/Hud.hpp src/Systems/CombatSystem.cpp src/Systems/CombatSystem.hpp src/Init/createPlayer.cpp src/Init/initGame.hpp src/Init/createBackGround.cpp src/Init/createEnemies.cpp)
+add_executable(braveSpaceRace src/main.cpp src/ECS/ComponentPool.hpp
+        src/ECS/DataTypesECS.hpp src/ECS/ECS.hpp src/ECS/EntityManager.hpp
+        src/ECS/EntityViewer.hpp src/ECS/ISystem.hpp src/InputManager/InputManager.cpp
+        src/InputManager/InputManager.hpp src/Systems/DisplaySystem.cpp
+        src/Systems/DisplaySystem.hpp src/Systems/MovementSystem.cpp
+        src/Systems/MovementSystem.hpp src/InputManager/EventQueue/EventQueue.cpp
+        src/InputManager/EventQueue/EventQueue.hpp src/Hud.cpp src/Hud.hpp
+        src/Systems/CombatSystem.cpp src/Systems/CombatSystem.hpp src/Init/createPlayer.cpp
+        src/Init/initGame.hpp src/Init/createBackGround.cpp src/Init/createEnemies.cpp src/Timer.hpp)
 
 
 target_link_libraries(braveSpaceRace PRIVATE ${OPENGL_LIBRARIES} sfml-graphics)
