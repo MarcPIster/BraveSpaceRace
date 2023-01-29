@@ -81,13 +81,19 @@ void DisplaySystem::animateAstroids(EntityID ent, sf::RectangleShape *body) cons
 
 void DisplaySystem::updateData(SystemData &t_data) {}
 
-void DisplaySystem::displayHUD() {
+void DisplaySystem::displayHUD()
+{
 for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
         HudData* hudData = (*m_em.get()).Get<HudData>(ent);
         m_hud->setHudStatus(hudData->active);
     }
     if (m_hud->getHudStatus()) {
-      m_window->draw(*(m_hud)->getMBackground());
-      m_window->draw(*(m_hud)->getMHeart());
-    }
+        int *live;
+        for (EntityID ent : EntityViewer<sf::CircleShape, int>(*m_em.get())) {
+          live = (*m_em.get()).Get<int>(ent);
+          break ;
+        }
+          m_window->draw(*(m_hud)->getMBackground());
+          m_window->draw(*(m_hud)->getMHeart(*live));
+        }
 }

@@ -12,13 +12,14 @@ public:
     Hud(sf::Vector2u t_window_size, bool t_active);
     ~Hud(){};
 
-    sf::RectangleShape *getMHeart() const;
+    sf::RectangleShape *getMHeart(int t_player_live) const;
     sf::RectangleShape *getMBackground() const;
     bool getHudStatus() const;
     void setHudStatus(bool t_status);
+
 private:
     sf::RectangleShape* m_background;
-    sf::RectangleShape* m_health_bar;
+    std::vector<sf::RectangleShape*> m_health_bar;
     bool m_active;
 };
 
