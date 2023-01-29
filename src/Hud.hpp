@@ -21,6 +21,7 @@ private:
     sf::RectangleShape* m_background;
     std::vector<sf::RectangleShape*> m_health_bar;
     bool m_active;
+    void initHealthSprite(std::string t_path, int t_index, sf::Vector2u t_window_size);
 };
 
 
