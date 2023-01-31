@@ -98,6 +98,8 @@ for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
           m_window->draw(*(m_hud)->getMBackground());
           m_window->draw(*(m_hud)->getMHeart(*live));
           m_window->draw(*(shop)->getMBackground());
+          m_hud->updateLives(*live);
+          m_window->draw(*(m_hud)->getMLive());
           for (auto card: shop->getCards()) {
             m_window->draw(*card.card);
             m_window->draw(*card.text);

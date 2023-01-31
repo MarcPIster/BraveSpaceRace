@@ -3,11 +3,17 @@
 Hud::Hud(sf::Vector2u t_window_size, bool t_active) {
     //init Background
     m_background = new sf::RectangleShape();
+    m_font = new sf::Font();
+    m_live = new sf::Text();
+    m_font->loadFromFile("../src/Sprites/Fonts/SpaceMono-Regular.ttf");
+    m_live->setFont(*m_font);
+    m_live->setCharacterSize(20);
     m_background->setSize({200, 100});
     m_background->setFillColor(sf::Color::Transparent);
     m_background->setOutlineThickness(3);
     m_background->setOutlineColor(sf::Color::White);
     m_background->setPosition({static_cast<float>(t_window_size.x - 205), 5});
+
 
     //init Health Bar
     initHealthSprite("../src/Sprites/heart100.png", 0, t_window_size);
@@ -61,6 +67,12 @@ sf::RectangleShape *Hud::getMHeart(int t_player_live) const {
     return m_health_bar[10];
 }
 
+void Hud::updateLives(int t_player_live) {
+    m_live->setString(std::to_string(t_player_live));
+    m_live->setOrigin(m_live->getGlobalBounds().width / 2, (m_live->getGlobalBounds().height / 2) - 20);
+    m_live->setPosition(m_health_bar[0]->getPosition().x + m_health_bar[0]->getSize().x / 2, m_health_bar[0]->getPosition().y / 2 );
+}
+
 bool Hud::getHudStatus() const {
     return m_active;
 }
@@ -68,3 +80,5 @@ bool Hud::getHudStatus() const {
 void Hud::setHudStatus(bool t_status) {
     m_active = t_status;
 }
+
+sf::Text *Hud::getMLive() const { return m_live; }
