@@ -5,6 +5,12 @@
 DisplaySystem::DisplaySystem(std::shared_ptr<EntityManager> t_em, sf::RenderWindow &t_window) {
     m_em = t_em;
     m_window = &t_window;
+    m_mouseCircle = new sf::CircleShape(10);
+    m_mouseCircle->setFillColor(sf::Color::Transparent);
+    m_mouseCircle->setOutlineColor(sf::Color::Red);
+    m_mouseCircle->setOutlineThickness(2);
+    m_mouseCircle->setOrigin(10, 10);
+
     for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
         HudData* hudData = (*m_em.get()).Get<HudData>(ent);
         m_hud = new Hud(m_window->getSize(), hudData->active);
@@ -24,14 +30,28 @@ void DisplaySystem::update() {
       m_window->draw(*(sprite)->getSprite());
     }
 
-    for (EntityID ent : EntityViewer<sf::CircleShape>(*m_em.get()))
+    for (EntityID ent : EntityViewer<sf::CircleShape, PlayerRange>(*m_em.get()))
     {
       sf::CircleShape* body = (*m_em.get()).Get<sf::CircleShape>(ent);
+      PlayerRange* range = (*m_em.get()).Get<PlayerRange>(ent);
       m_window->draw(*body);
+      if (range->active) {
+        sf::CircleShape rangeCircle;
+        rangeCircle.setRadius(range->current);
+        rangeCircle.setOrigin(range->current, range->current);
+        rangeCircle.setPosition(body->getPosition());
+        rangeCircle.setFillColor(sf::Color(0, 0, 0, 0));
+        rangeCircle.setOutlineColor(sf::Color::Red);
+        rangeCircle.setOutlineThickness(1);
+        m_window->draw(rangeCircle);
+      }
     }
 
     displayEnemies();
     displayHUD();
+    m_mouseCircle->setPosition(sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y);
+
+    m_window->draw(*m_mouseCircle);
     m_window->display();
 }
 
@@ -90,7 +110,7 @@ for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
     if (m_hud->getHudStatus()) {
         int *live;
         Shop* shop;
-            for (EntityID ent : EntityViewer<sf::CircleShape, int, Shop>(*m_em.get())) {
+        for (EntityID ent : EntityViewer<sf::CircleShape, int, Shop, PlayerRange>(*m_em.get())) {
           live = (*m_em.get()).Get<int>(ent);
           shop = (*m_em.get()).Get<Shop>(ent);
           break ;

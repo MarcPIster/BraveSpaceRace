@@ -3,6 +3,7 @@
 
 #include "../ECS/EntityManager.hpp"
 #include "../Shop/Shop.hpp"
+#include "Structures.hpp"
 
 
 

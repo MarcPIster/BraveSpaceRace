@@ -21,7 +21,7 @@ add_executable(braveSpaceRace src/main.cpp src/ECS/ComponentPool.hpp
         src/Systems/MovementSystem.hpp src/InputManager/EventQueue/EventQueue.cpp
         src/InputManager/EventQueue/EventQueue.hpp src/Hud.cpp src/Hud.hpp
         src/Systems/CombatSystem.cpp src/Systems/CombatSystem.hpp src/Init/createPlayer.cpp
-        src/Init/initGame.hpp src/Init/createBackGround.cpp src/Init/createEnemies.cpp src/Timer.hpp src/Shop/Shop.cpp src/Shop/Shop.hpp)
+        src/Init/initGame.hpp src/Init/createBackGround.cpp src/Init/createEnemies.cpp src/Timer.hpp src/Shop/Shop.cpp src/Shop/Shop.hpp src/Init/Structures.hpp)
 
 
 target_link_libraries(braveSpaceRace PRIVATE ${OPENGL_LIBRARIES} sfml-graphics)

@@ -5,6 +5,7 @@
 #include "../Hud.hpp"
 #include "../Systems/CombatSystem.hpp"
 #include "../Shop/Shop.hpp"
+#include "../Init/Structures.hpp"
 
 
 class DisplaySystem : public ISystem {
@@ -22,6 +23,7 @@ class DisplaySystem : public ISystem {
    Hud* m_hud;
    void displayEnemies();
    void animateAstroids(EntityID ent, sf::RectangleShape *body) const;
+   sf::CircleShape* m_mouseCircle;
 };
 
 #endif  // CLIENT_SRC_SYSTEMS_IDISPLAY_HPP_

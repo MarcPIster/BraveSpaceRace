@@ -28,7 +28,7 @@ int main() {
     int height = 700;
     sf::RenderWindow window(sf::VideoMode(width, height), "PRIVAT WIP GAME");
     window.setFramerateLimit(maxFPS);
-
+    window.setMouseCursorVisible(false);
     // init EntityManager
     EntityManager entity_manager = initGameManager({width, height});
 
