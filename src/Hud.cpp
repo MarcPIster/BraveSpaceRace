@@ -1,16 +1,6 @@
 #include "Hud.hpp"
 
-void Hud::initHealthSprite(std::string t_path, int t_index,sf::Vector2u t_window_size) {
-  m_health_bar.push_back(new sf::RectangleShape());
-  sf::Texture* texture = new sf::Texture();
-  texture->loadFromFile(t_path);
-  m_health_bar[t_index]->setSize({50, 50});
-  m_health_bar[t_index]->setTexture(texture);
-  m_health_bar[t_index]->setPosition({static_cast<float>(t_window_size.x - 205 ), 5});
-}
-
 Hud::Hud(sf::Vector2u t_window_size, bool t_active) {
-
     //init Background
     m_background = new sf::RectangleShape();
     m_background->setSize({200, 100});
@@ -32,8 +22,17 @@ Hud::Hud(sf::Vector2u t_window_size, bool t_active) {
     initHealthSprite("../src/Sprites/heart10.png", 9, t_window_size);
     initHealthSprite("../src/Sprites/heart0.png", 10, t_window_size);
     m_active = t_active;
-
 }
+
+void Hud::initHealthSprite(std::string t_path, int t_index,sf::Vector2u t_window_size) {
+    m_health_bar.push_back(new sf::RectangleShape());
+    sf::Texture* texture = new sf::Texture();
+    texture->loadFromFile(t_path);
+    m_health_bar[t_index]->setSize({50, 50});
+    m_health_bar[t_index]->setTexture(texture);
+    m_health_bar[t_index]->setPosition({static_cast<float>(t_window_size.x - 205 ), 5});
+}
+
 sf::RectangleShape *Hud::getMBackground() const {
     return m_background;
 }

@@ -4,6 +4,7 @@
 #include "../ECS/ISystem.hpp"
 #include "../Hud.hpp"
 #include "../Systems/CombatSystem.hpp"
+#include "../Shop/Shop.hpp"
 
 
 class DisplaySystem : public ISystem {

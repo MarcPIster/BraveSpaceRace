@@ -1,12 +1,14 @@
 #include "initGame.hpp"
 
 
-void createPlayer(EntityManager& t_entity_manager) {
+void createPlayer(EntityManager& t_entity_manager, sf::Vector2i t_window_size) {
     EntityID player = t_entity_manager.createNewEntity();
     SpriteECS player_sprite = SpriteECS("../src/Sprites/world.png");
     sf::CircleShape body;
 
-    body.setRadius(50);
+    Shop *shop = t_entity_manager.Assign<Shop>(player, Shop(t_window_size));
+
+    body.setRadius(40);
     body.setPosition(600, 100);
     body.setTexture(player_sprite.getTexture());
     sf::CircleShape *player_body = t_entity_manager.Assign<sf::CircleShape>(player, body);

@@ -31,7 +31,7 @@ void CombatSystem::update() {
     }
     for (auto enemy : enemies) {
         if (body->getGlobalBounds().intersects((*m_em.get()).Get<sf::RectangleShape>(enemy)->getGlobalBounds())) {
-            std::cout << "Collision "<< i << std::endl;
+            std::cout << "Collision "<< enemy << std::endl;
             *life -= 10;
             int* alive = (*m_em.get()).Get<int>(enemy);
             //set live to -1 to despawn, 0 to respawn

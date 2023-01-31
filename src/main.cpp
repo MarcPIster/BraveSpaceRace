@@ -11,8 +11,8 @@ EntityManager initGameManager(sf::Vector2i t_window_size) {
     EntityManager entity_manager;
 
     createBackground(entity_manager);
-    createPlayer(entity_manager);
-    createEnemys(entity_manager, 20, t_window_size);
+    createPlayer(entity_manager, t_window_size);
+    createEnemys(entity_manager, 30, t_window_size);
 
     EntityID hud_status = entity_manager.createNewEntity();
     HudData *hud_stat = entity_manager.Assign<HudData>(hud_status, HudData{false});
@@ -25,7 +25,7 @@ int main() {
     // Create the main window
     int maxFPS = 60;
     int width = 1440;
-    int height = 900;
+    int height = 700;
     sf::RenderWindow window(sf::VideoMode(width, height), "PRIVAT WIP GAME");
     window.setFramerateLimit(maxFPS);
 

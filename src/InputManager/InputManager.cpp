@@ -12,15 +12,12 @@ void InputManager::recordInputs(const sf::Event &t_event)
 {
   if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
       this->m_input_queue.push_back(sf::Mouse::Left);
-      printf("Left");
   }
   if(sf::Mouse::isButtonPressed(sf::Mouse::Right)){
       this->m_input_queue.push_back(sf::Mouse::Right);
-      printf("Right");
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
         this->m_input_queue.push_back(sf::Keyboard::K);
-        printf("K");
     }
 
     //std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change

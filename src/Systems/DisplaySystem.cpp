@@ -1,8 +1,6 @@
 #include "DisplaySystem.hpp"
 
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 
 DisplaySystem::DisplaySystem(std::shared_ptr<EntityManager> t_em, sf::RenderWindow &t_window) {
     m_em = t_em;
@@ -53,11 +51,13 @@ void DisplaySystem::displayEnemies() {
 void DisplaySystem::animateAstroids(EntityID ent, sf::RectangleShape *body) const {
     double *currentFrame = (*m_em.get()).Get<double>(ent);
     Timer *timer = (*m_em.get()).Get<Timer>(ent);
+
     if (timer->returnTime() > 0.05) {
         *currentFrame += 1;
         timer->restartTimer();
     }
 
+    //check current frame and set texture
     if (*currentFrame < 8) {
       body->setTextureRect(sf::IntRect(125 * (int)*currentFrame, 0, 125, 125));
     } else if (*currentFrame < 16) {
@@ -89,11 +89,17 @@ for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
     }
     if (m_hud->getHudStatus()) {
         int *live;
-        for (EntityID ent : EntityViewer<sf::CircleShape, int>(*m_em.get())) {
+        Shop* shop;
+            for (EntityID ent : EntityViewer<sf::CircleShape, int, Shop>(*m_em.get())) {
           live = (*m_em.get()).Get<int>(ent);
+          shop = (*m_em.get()).Get<Shop>(ent);
           break ;
         }
           m_window->draw(*(m_hud)->getMBackground());
           m_window->draw(*(m_hud)->getMHeart(*live));
+          m_window->draw(*(shop)->getMBackground());
+          for (auto card: shop->getCards()) {
+            m_window->draw(*card.card);
+          }
         }
 }
