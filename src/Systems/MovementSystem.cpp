@@ -29,9 +29,13 @@ void MovementSystem::updateData(SystemData &t_data) {
 void MovementSystem::update() {
   for (EntityID ent : EntityViewer<sf::CircleShape>(*m_em.get())) {
     sf::CircleShape* body = (*m_em.get()).Get<sf::CircleShape>(ent);
-
     if (m_event_queue.checkIfKeyPressed(sf::Mouse::Left)) {
       movePlanet(body, sf::Mouse::getPosition(*m_window));
+      for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
+        HudData *hudData = (*m_em.get()).Get<HudData>(ent);
+        if (hudData->active)
+          clickShop(sf::Mouse::getPosition(*m_window));
+      }
     }
     if (m_event_queue.checkIfKeyPressed(sf::Mouse::Right)) {
       ;
@@ -56,7 +60,6 @@ void MovementSystem::update() {
   }
 
   checkHUD();
-
 
 }
 void MovementSystem::checkHUD() {
@@ -94,4 +97,16 @@ sf::Vector2f MovementSystem::moveEnemies(sf::Vector2f current_position, sf::Vect
       current_position = target_position;
     }
     return current_position;
+}
+
+void MovementSystem::clickShop(const sf::Vector2i &mouse_pos) {
+    for (EntityID ent : EntityViewer<Shop, sf::CircleShape>(*m_em.get())) {
+      Shop *shop = (*m_em.get()).Get<Shop>(ent);
+      for (auto card : shop->getCards()) {
+        if (mouse_pos.x >= card.card->getPosition().x && mouse_pos.x <= card.card->getPosition().x + card.card->getSize().x &&
+            mouse_pos.y >= card.card->getPosition().y && mouse_pos.y <= card.card->getPosition().y + card.card->getSize().y) {
+          shop->clickCard(&card);
+        }
+      }
+    }
 }

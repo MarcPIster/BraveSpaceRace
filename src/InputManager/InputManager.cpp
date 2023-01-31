@@ -48,11 +48,9 @@ sf::Vector2i InputManager::getMousePosition()
 bool InputManager::isMouseLeftClicked()
 {
   return sf::Mouse::isButtonPressed(sf::Mouse::Left);
-  // Needs click position
 }
 
 bool InputManager::isMouseRightClicked()
 {
   return sf::Mouse::isButtonPressed(sf::Mouse::Right);
-  // Needs click position
 }

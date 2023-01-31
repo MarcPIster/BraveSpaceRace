@@ -5,10 +5,11 @@
 #include "../ECS/DataTypesECS.hpp"
 #include "../Hud.hpp"
 #include "../Systems/CombatSystem.hpp"
+#include "../Shop/Shop.hpp"
 
 #include "math.h"
 
-
+//Movement / Interfaces clicking
 class MovementSystem : public ISystem {
  public:
   MovementSystem(std::shared_ptr<EntityManager> t_em);
@@ -27,6 +28,7 @@ class MovementSystem : public ISystem {
   sf::Vector2f moveEnemies(sf::Vector2f current_position, sf::Vector2f target_position, float speed);
   void movePlanet(sf::CircleShape *body, const sf::Vector2i &mouse_pos) const;
   void checkHUD();
+  void clickShop(const sf::Vector2i &mouse_pos);
 };
 
 #endif  // CLIENT_SRC_SYSTEMS_MOVEMENTSYSTEM_HPP_

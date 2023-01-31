@@ -100,6 +100,7 @@ for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
           m_window->draw(*(shop)->getMBackground());
           for (auto card: shop->getCards()) {
             m_window->draw(*card.card);
+            m_window->draw(*card.text);
           }
         }
 }
