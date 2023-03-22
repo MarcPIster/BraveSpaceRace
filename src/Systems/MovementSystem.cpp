@@ -48,20 +48,19 @@ void MovementSystem::update() {
     player_position = (*m_em.get()).Get<sf::CircleShape>(ent)->getPosition();
   }
 
-  for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float, int>(*m_em.get())) {
+  for (EntityID ent : EntityViewer<Animation, Pos, float, int>(*m_em.get())) {
     int *lifes = (*m_em.get()).Get<int>(ent);
-    if (!*lifes >= 1)
+    if (*lifes < 1)
       continue ;
-    sf::RectangleShape* enemy = (*m_em.get()).Get<sf::RectangleShape>(ent);
+    Animation* animation_enemy = (*m_em.get()).Get<Animation>(ent);
     Pos *pos = (*m_em.get()).Get<Pos>(ent);
     float *speed = (*m_em.get()).Get<float>(ent);
     pos->position = moveEnemies(pos->position, player_position, *speed);
-    enemy->setPosition(pos->position);
+    animation_enemy->body.setPosition(pos->position);
   }
-
   checkHUD();
-
 }
+
 void MovementSystem::checkHUD() {
   for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
     HudData* hudData = (*m_em.get()).Get<HudData>(ent);

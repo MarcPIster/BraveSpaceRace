@@ -31,15 +31,14 @@ void createEnemy(EntityManager& t_entity_manager, sf::Vector2f t_pos) {
     sf::RectangleShape body;
     body.setSize(sf::Vector2f(50, 50));
     body.setTexture(enemy_sprite.getTexture());
-    Timer timer = Timer(1);
-    timer.startTimer(1);
-    t_entity_manager.Assign<Timer>(enemy, timer);
     body.setPosition(t_pos);
-    double* currentFrame = t_entity_manager.Assign<double>(enemy, 0);
-    int *life = t_entity_manager.Assign<int>(enemy, 0);
+    int *life = t_entity_manager.Assign<int>(enemy, 1);
     float* speed = t_entity_manager.Assign<float>(enemy, 5);
     Pos *pos = t_entity_manager.Assign<Pos>(enemy, Pos{ t_pos, t_pos});
-    sf::RectangleShape *enemy_body = t_entity_manager.Assign<sf::RectangleShape>(enemy, body);
+    Animation enemy_animation = {
+        body, 0,0,0, 0,0,0,0,0,0,0, true
+    };
+    Animation *animation = t_entity_manager.Assign<Animation>(enemy, enemy_animation);
 }
 
 void createEnemys(EntityManager& t_entity_manager, int t_how_many, sf::Vector2i t_window_size) {

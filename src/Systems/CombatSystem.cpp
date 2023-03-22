@@ -9,19 +9,12 @@ CombatSystem::~CombatSystem() {}
 
 void CombatSystem::update() {
     std::vector<EntityID> enemies;
-    for (EntityID ent : EntityViewer<sf::RectangleShape, Pos, float, int, Timer>(*m_em.get())) {
-      Timer *timer = (*m_em.get()).Get<Timer>(ent);
-      int* alive =  (*m_em.get()).Get<int>(ent);
-      if (timer->checkStartTime()){
-        if (*alive == 0) {
-          *alive = 1;
+        for (EntityID ent : EntityViewer<Animation, int>(*m_em.get())) {
+               int *alive = (*m_em.get()).Get<int>(ent);
+                 if (*alive >= 1) {
+                     enemies.push_back(ent);
+                 }
         }
-      }
-      if (*alive >= 1) {
-        enemies.push_back(ent);
-        continue ;
-      }
-    }
     int i = 0;
     sf::CircleShape* body;
     int *life;
@@ -30,11 +23,10 @@ void CombatSystem::update() {
         life = (*m_em.get()).Get<int>(ent);
     }
     for (auto enemy : enemies) {
-        if (body->getGlobalBounds().intersects((*m_em.get()).Get<sf::RectangleShape>(enemy)->getGlobalBounds())) {
+        if (body->getGlobalBounds().intersects((*m_em.get()).Get<Animation>(enemy)->body.getGlobalBounds())) {
             std::cout << "Collision "<< enemy << std::endl;
             *life -= 10;
             int* alive = (*m_em.get()).Get<int>(enemy);
-            //set live to -1 to despawn, 0 to respawn
             *alive = -1;
         }
         i++;

@@ -38,13 +38,13 @@ Shop::Shop(sf::Vector2i t_window_size) {
     m_background->setPosition({(static_cast<float>(t_window_size.x) / 2) - (width/2),
                                static_cast<float>(t_window_size.y) - height - 5});
 
-    createCard("TEST", 2, {(int(t_window_size.x) / 2) - int(width/2),
+    createCard("TEST", 8, {(int(t_window_size.x) / 2) - int(width/2),
                            int(t_window_size.y) - int(height + 5)});
-    createCard("Unit", 2, {(int(t_window_size.x) / 2) - int(width/2),
+    createCard("Unit", 9, {(int(t_window_size.x) / 2) - int(width/2),
                            int(t_window_size.y) - int(height + 5)});
-    createCard("Broski", 2, {(int(t_window_size.x) / 2) - int(width/2),
+    createCard("Broski", 1, {(int(t_window_size.x) / 2) - int(width/2),
                            int(t_window_size.y) - int(height + 5)});
-    createCard("Lama", 2, {(int(t_window_size.x) / 2) - int(width/2),
+    createCard("Lama", 3, {(int(t_window_size.x) / 2) - int(width/2),
                            int(t_window_size.y) - int(height + 5)});
     createCard("Krieger", 2, {(int(t_window_size.x) / 2) - int(width/2),
                            int(t_window_size.y) - int(height + 5)});

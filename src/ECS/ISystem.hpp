@@ -4,6 +4,7 @@
 #include <memory>
 #include "../ECS/EntityViewer.hpp"
 #include "../ECS/DataTypesECS.hpp"
+#include "../Init/Structures.hpp"
 
 class ISystem {
  public:
