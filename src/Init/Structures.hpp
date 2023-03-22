@@ -23,4 +23,9 @@ struct Animation {
   bool active;
 };
 
+enum UnitClass {
+  STARSHIP,
+  ASTEROIDSHOOTER
+};
+
 #endif // BRAVESPACERACE_STRUCTURES_HPP

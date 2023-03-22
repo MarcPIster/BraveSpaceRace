@@ -13,7 +13,7 @@ EntityManager initGameManager(sf::Vector2i t_window_size) {
 
     createBackground(entity_manager);
     createPlayer(entity_manager, t_window_size);
-    createEnemys(entity_manager, 30, t_window_size);
+    createEnemys(entity_manager, 3, t_window_size);
 
     EntityID hud_status = entity_manager.createNewEntity();
     HudData *hud_stat = entity_manager.Assign<HudData>(hud_status, HudData{false});

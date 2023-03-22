@@ -16,17 +16,17 @@ Hud::Hud(sf::Vector2u t_window_size, bool t_active) {
 
 
     //init Health Bar
-    initHealthSprite("../src/Sprites/heart100.png", 0, t_window_size);
-    initHealthSprite("../src/Sprites/heart90.png", 1, t_window_size);
-    initHealthSprite("../src/Sprites/heart80.png", 2, t_window_size);
-    initHealthSprite("../src/Sprites/heart70.png", 3, t_window_size);
-    initHealthSprite("../src/Sprites/heart60.png", 4, t_window_size);
-    initHealthSprite("../src/Sprites/heart50.png", 5, t_window_size);
-    initHealthSprite("../src/Sprites/heart40.png", 6, t_window_size);
-    initHealthSprite("../src/Sprites/heart30.png", 7, t_window_size);
-    initHealthSprite("../src/Sprites/heart20.png", 8, t_window_size);
-    initHealthSprite("../src/Sprites/heart10.png", 9, t_window_size);
-    initHealthSprite("../src/Sprites/heart0.png", 10, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart100.png", 0, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart90.png", 1, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart80.png", 2, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart70.png", 3, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart60.png", 4, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart50.png", 5, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart40.png", 6, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart30.png", 7, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart20.png", 8, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart10.png", 9, t_window_size);
+    initHealthSprite("../src/Sprites/UI/heart0.png", 10, t_window_size);
     m_active = t_active;
 }
 

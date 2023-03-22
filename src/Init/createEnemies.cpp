@@ -26,7 +26,7 @@ sf::Vector2f getRandomVectorOutsideScreen(sf::Vector2i screenSize) {
 
 void createEnemy(EntityManager& t_entity_manager, sf::Vector2f t_pos) {
     EntityID enemy = t_entity_manager.createNewEntity();
-    SpriteECS enemy_sprite = SpriteECS("../src/Sprites/astroids.png");
+    SpriteECS enemy_sprite = SpriteECS("../src/Sprites/Enemies/astroids.png");
 
     sf::RectangleShape body;
     body.setSize(sf::Vector2f(50, 50));

@@ -68,28 +68,28 @@ void DisplaySystem::displayEnemies() {
 
 void DisplaySystem::updateData(SystemData &t_data) {}
 
-void DisplaySystem::displayHUD()
-{
-for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
+void DisplaySystem::displayHUD() {
+    for (EntityID ent : EntityViewer<HudData>(*m_em.get())) {
         HudData* hudData = (*m_em.get()).Get<HudData>(ent);
         m_hud->setHudStatus(hudData->active);
     }
+    int *live;
+    Shop* shop;
+    for (EntityID ent : EntityViewer<sf::CircleShape, int, Shop, PlayerRange>(*m_em.get())) {
+        live = (*m_em.get()).Get<int>(ent);
+        shop = (*m_em.get()).Get<Shop>(ent);
+        break ;
+    }
     if (m_hud->getHudStatus()) {
-        int *live;
-        Shop* shop;
-        for (EntityID ent : EntityViewer<sf::CircleShape, int, Shop, PlayerRange>(*m_em.get())) {
-          live = (*m_em.get()).Get<int>(ent);
-          shop = (*m_em.get()).Get<Shop>(ent);
-          break ;
-        }
-          m_window->draw(*(m_hud)->getMBackground());
-          m_window->draw(*(m_hud)->getMHeart(*live));
-          m_window->draw(*(shop)->getMBackground());
-          m_hud->updateLives(*live);
-          m_window->draw(*(m_hud)->getMLive());
           for (auto card: shop->getCards()) {
             m_window->draw(*card.card);
             m_window->draw(*card.text);
           }
-        }
+          m_window->draw(*(shop)->getMBackground());
+    }
+    m_window->draw(*(m_hud)->getMBackground());
+    m_window->draw(*(m_hud)->getMHeart(*live));
+    m_hud->updateLives(*live);
+    m_window->draw(*(m_hud)->getMLive());
+
 }

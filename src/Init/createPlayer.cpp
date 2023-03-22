@@ -3,7 +3,7 @@
 
 void createPlayer(EntityManager& t_entity_manager, sf::Vector2i t_window_size) {
     EntityID player = t_entity_manager.createNewEntity();
-    SpriteECS player_sprite = SpriteECS("../src/Sprites/world.png");
+    SpriteECS player_sprite = SpriteECS("../src/Sprites/Worlds/world.png");
     sf::CircleShape body;
 
     Shop *shop = t_entity_manager.Assign<Shop>(player, Shop(t_window_size));
