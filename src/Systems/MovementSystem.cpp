@@ -48,11 +48,11 @@ void MovementSystem::update() {
     player_position = (*m_em.get()).Get<sf::CircleShape>(ent)->getPosition();
   }
 
-  for (EntityID ent : EntityViewer<Animation, Pos, float, int>(*m_em.get())) {
+  for (EntityID ent : EntityViewer<AnimationEnemy, Pos, float, int>(*m_em.get())) {
     int *lifes = (*m_em.get()).Get<int>(ent);
     if (*lifes < 1)
       continue ;
-    Animation* animation_enemy = (*m_em.get()).Get<Animation>(ent);
+    AnimationEnemy * animation_enemy = (*m_em.get()).Get<AnimationEnemy>(ent);
     Pos *pos = (*m_em.get()).Get<Pos>(ent);
     float *speed = (*m_em.get()).Get<float>(ent);
     pos->position = moveEnemies(pos->position, player_position, *speed);
@@ -99,12 +99,13 @@ sf::Vector2f MovementSystem::moveEnemies(sf::Vector2f current_position, sf::Vect
 }
 
 void MovementSystem::clickShop(const sf::Vector2i &mouse_pos) {
-    for (EntityID ent : EntityViewer<Shop, sf::CircleShape>(*m_em.get())) {
+    for (EntityID ent : EntityViewer<Shop, sf::CircleShape, float>(*m_em.get())) {
       Shop *shop = (*m_em.get()).Get<Shop>(ent);
+      float *player_money = (*m_em.get()).Get<float>(ent);
       for (auto card : shop->getCards()) {
         if (mouse_pos.x >= card.card->getPosition().x && mouse_pos.x <= card.card->getPosition().x + card.card->getSize().x &&
             mouse_pos.y >= card.card->getPosition().y && mouse_pos.y <= card.card->getPosition().y + card.card->getSize().y) {
-          shop->clickCard(&card);
+          shop->clickCard(&card, mouse_pos, *player_money);
         }
       }
     }

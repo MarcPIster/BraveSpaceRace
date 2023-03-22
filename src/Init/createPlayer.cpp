@@ -16,4 +16,5 @@ void createPlayer(EntityManager& t_entity_manager, sf::Vector2i t_window_size) {
     sf::CircleShape *player_body = t_entity_manager.Assign<sf::CircleShape>(player, body);
     Level *player_level = t_entity_manager.Assign<Level>(player, {.level= 1, .process= 0});
     int *player_health = t_entity_manager.Assign<int>(player, 100);
+    float *player_money = t_entity_manager.Assign<float>(player, 1000);
 }

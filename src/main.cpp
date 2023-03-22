@@ -2,9 +2,10 @@
 #include "./Init/initGame.hpp"
 #include "./InputManager/InputManager.hpp"
 #include "./Systems/CombatSystem.hpp"
+#include "Systems/AnimationSystem.hpp"
 #include "Systems/DisplaySystem.hpp"
 #include "Systems/MovementSystem.hpp"
-#include "Systems/AnimationSystem.hpp"
+#include "Systems/ShopSystem.hpp"
 
 int counter;
 
@@ -40,6 +41,7 @@ int main() {
     systems.push_back(std::make_shared<CombatSystem>(std::make_shared<EntityManager>(entity_manager)));
     systems.push_back(std::make_shared<DisplaySystem>(std::make_shared<EntityManager>(entity_manager), window));
     systems.push_back(std::make_shared<AnimationSystem>(std::make_shared<EntityManager>(entity_manager)));
+    systems.push_back(std::make_shared<ShopSystem>(std::make_shared<EntityManager>(entity_manager)));
 
 
     // init input manager

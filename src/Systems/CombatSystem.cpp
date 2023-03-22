@@ -9,7 +9,7 @@ CombatSystem::~CombatSystem() {}
 
 void CombatSystem::update() {
     std::vector<EntityID> enemies;
-        for (EntityID ent : EntityViewer<Animation, int>(*m_em.get())) {
+        for (EntityID ent : EntityViewer<AnimationEnemy, int>(*m_em.get())) {
                int *alive = (*m_em.get()).Get<int>(ent);
                  if (*alive >= 1) {
                      enemies.push_back(ent);
@@ -23,7 +23,7 @@ void CombatSystem::update() {
         life = (*m_em.get()).Get<int>(ent);
     }
     for (auto enemy : enemies) {
-        if (body->getGlobalBounds().intersects((*m_em.get()).Get<Animation>(enemy)->body.getGlobalBounds())) {
+        if (body->getGlobalBounds().intersects((*m_em.get()).Get<AnimationEnemy>(enemy)->body.getGlobalBounds())) {
             std::cout << "Collision "<< enemy << std::endl;
             *life -= 10;
             int* alive = (*m_em.get()).Get<int>(enemy);

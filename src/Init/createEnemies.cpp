@@ -35,10 +35,10 @@ void createEnemy(EntityManager& t_entity_manager, sf::Vector2f t_pos) {
     int *life = t_entity_manager.Assign<int>(enemy, 1);
     float* speed = t_entity_manager.Assign<float>(enemy, 5);
     Pos *pos = t_entity_manager.Assign<Pos>(enemy, Pos{ t_pos, t_pos});
-    Animation enemy_animation = {
-        body, 0,0,0, 0,0,0,0,0,0,0, true
+    AnimationEnemy enemy_animation = {
+        body, 0,0,0, 0,125,125,0,0,0,0, true
     };
-    Animation *animation = t_entity_manager.Assign<Animation>(enemy, enemy_animation);
+    AnimationEnemy *animation = t_entity_manager.Assign<AnimationEnemy>(enemy, enemy_animation);
 }
 
 void createEnemys(EntityManager& t_entity_manager, int t_how_many, sf::Vector2i t_window_size) {

@@ -46,6 +46,8 @@ void DisplaySystem::update() {
       }
     }
 
+    //TODO: Draw all units here!
+
     displayEnemies();
     displayHUD();
     m_mouseCircle->setPosition(sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y);
@@ -55,9 +57,9 @@ void DisplaySystem::update() {
 }
 
 void DisplaySystem::displayEnemies() {
-    for (EntityID ent : EntityViewer<Animation, Pos, float, int>(*m_em.get()))
+    for (EntityID ent : EntityViewer<AnimationEnemy, Pos, float, int>(*m_em.get()))
     {
-      Animation* animation = (*m_em.get()).Get<Animation>(ent);
+      AnimationEnemy * animation = (*m_em.get()).Get<AnimationEnemy>(ent);
 
       int *alive = (*m_em.get()).Get<int>(ent);
         if (*alive >= 1) {

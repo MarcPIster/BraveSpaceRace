@@ -3,13 +3,14 @@
 #include <utility>
 
 
-void Shop::createCard(std::string t_name, int t_cost, sf::Vector2i t_shop_size) {
+void Shop::createCard(std::string t_name, int t_cost, sf::Vector2i t_shop_size, UnitClass t_unit_class) {
   int multiplier = (m_unit_cards.size() * 150) + (25 * m_unit_cards.size()) +25;
   Unit unit = {
       .name = std::move(t_name),
       .cost = t_cost,
       .card = new sf::RectangleShape(),
-      .text = new sf::Text() };
+      .text = new sf::Text(),
+      .unit_class = t_unit_class};
   unit.text->setFont(*m_font);
   unit.text->setCharacterSize(24);
   unit.text->setFillColor(sf::Color::Black);
@@ -39,15 +40,15 @@ Shop::Shop(sf::Vector2i t_window_size) {
                                static_cast<float>(t_window_size.y) - height - 5});
 
     createCard("TEST", 8, {(int(t_window_size.x) / 2) - int(width/2),
-                           int(t_window_size.y) - int(height + 5)});
-    createCard("Unit", 9, {(int(t_window_size.x) / 2) - int(width/2),
-                           int(t_window_size.y) - int(height + 5)});
+                           int(t_window_size.y) - int(height + 5)}, WIP);
+    createCard("StarShip", 9, {(int(t_window_size.x) / 2) - int(width/2),
+                           int(t_window_size.y) - int(height + 5)}, STARSHIP);
     createCard("Broski", 1, {(int(t_window_size.x) / 2) - int(width/2),
-                           int(t_window_size.y) - int(height + 5)});
+                           int(t_window_size.y) - int(height + 5)}, WIP);
     createCard("Lama", 3, {(int(t_window_size.x) / 2) - int(width/2),
-                           int(t_window_size.y) - int(height + 5)});
+                           int(t_window_size.y) - int(height + 5)}, WIP);
     createCard("Krieger", 2, {(int(t_window_size.x) / 2) - int(width/2),
-                           int(t_window_size.y) - int(height + 5)});
+                           int(t_window_size.y) - int(height + 5)}, WIP);
 }
 
 Shop::~Shop() {
@@ -59,11 +60,17 @@ void Shop::levelUp() {
     m_exp = 0;
 }
 
-void Shop::clickCard(Unit *t_card) {
+void Shop::clickCard(Unit *t_card, sf::Vector2i t_mouse_pos,
+                     float t_player_money) {
     for (auto &m_unit_card : m_unit_cards) {
         if (m_unit_card.card == t_card->card) {
             m_unit_card.card->setOutlineColor(sf::Color::Green);
             std::cout << "Clicked on " << m_unit_card.name << std::endl;
+            if (t_player_money >= m_unit_card.cost) {
+                addToSpawnQueue(m_unit_card.unit_class);
+            } else {
+                std::cout << "You can't buy this card" << std::endl;
+            }
         } else {
             m_unit_card.card->setOutlineColor(sf::Color::Red);
         }
@@ -77,3 +84,13 @@ int Shop::getExp() const { return m_exp; }
 int Shop::getLevel() const { return m_level; }
 
 sf::RectangleShape *Shop::getMBackground() { return m_background; }
+
+void Shop::addToSpawnQueue(UnitClass t_unit) {
+    m_spawnQueue.push_back(t_unit);
+}
+
+std::vector<UnitClass> Shop::getSpawnQueue() const { return m_spawnQueue; }
+
+void Shop::clearSpawnQueue() {
+    m_spawnQueue.clear();
+}
